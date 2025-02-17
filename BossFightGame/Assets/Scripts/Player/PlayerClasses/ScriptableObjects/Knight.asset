@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8f0f30b0dd26b4ebfae287299c3c9a, type: 3}
+  m_Name: Knight
+  m_EditorClassIdentifier: 
+  previewSprite: {fileID: 0}
+  HoverSprite: {fileID: 0}
+  PrimaryAbilityImage: {fileID: 0}
+  SecondaryAbilityImage: {fileID: 0}
+  SpecialAbilityImage: {fileID: 0}
+  MobilityAbilityImage: {fileID: 0}
+  BasePrimaryDamage: 100
+  BaseSecondaryDamage: 50
+  BaseSpecialDamage: 150
+  ClassName: Knight
+  PrimaryAbilityName: Slash
+  SecondaryAbilityName: Poke
+  SpecialAbilityName: Lunge
+  MobilityAbilityName: Shield

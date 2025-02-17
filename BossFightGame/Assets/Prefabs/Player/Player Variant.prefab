@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232503436816789041, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.4253826
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7232503436816789041, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4925356
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7232503436816789041, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
       propertyPath: m_LocalPosition.z
@@ -95,6 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f0128f0d91bd84eb022e6b6b7d8c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RigidBody: {fileID: 8439721221911966018}
+  PlayerClass: {fileID: 0}
+  PlayerMovement: {fileID: -6519925208620118221}
 --- !u!114 &7546721598759730512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,3 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 3
+--- !u!50 &8439721221911966018 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2957140306753624027, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
+  m_PrefabInstance: {fileID: 6635551353536603801}
+  m_PrefabAsset: {fileID: 0}
