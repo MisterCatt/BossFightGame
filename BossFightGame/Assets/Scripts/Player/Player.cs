@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Player : Unit
 {
-    public Rigidbody2D RigidBody;
+    [Header("Player class")]
+    [Space]
     public PlayerClass PlayerClass;
     public PlayerMovement PlayerMovement;
 

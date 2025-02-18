@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RigidBody: {fileID: 8439721221911966018}
+  ColliderBox: {fileID: 7884062592462495275}
+  TriggerBox: {fileID: 1024933457224012258}
   PlayerClass: {fileID: 0}
   PlayerMovement: {fileID: -6519925208620118221}
   _targetEnemy: {fileID: 0}
@@ -148,6 +150,16 @@ MonoBehaviour:
   _moveDirection: {x: 0, y: 0}
   SlideSpeed: 1000
   _slideTime: 0.1
+--- !u!58 &1024933457224012258 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5922089749520676731, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
+  m_PrefabInstance: {fileID: 6635551353536603801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7884062592462495275 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3566824399137241266, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
+  m_PrefabInstance: {fileID: 6635551353536603801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!50 &8439721221911966018 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 2957140306753624027, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}

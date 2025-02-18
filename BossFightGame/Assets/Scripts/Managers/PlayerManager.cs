@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private Player _player1;
+
+    [SerializeField] private CinemachineCamera _cineCamera;
 
     private void Awake()
     {
@@ -26,5 +29,6 @@ public class PlayerManager : MonoBehaviour
     public void SetPlayer(Player player)
     {
         _player1 = player;
+        _cineCamera.Follow = _player1.transform;
     }
 }
