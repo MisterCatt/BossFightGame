@@ -5,8 +5,6 @@ public class Knight : PlayerClass
 {
     public Player Player;
 
-    public float SlideSpeed;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -25,9 +23,9 @@ public class Knight : PlayerClass
         Debug.Log("Primary ability");
     }
 
-    public override void OnSecondaryAbility()
+    public override void OnGunAbility()
     {
-        Debug.Log("Secondary ability");
+        Debug.Log("Gun ability");
     }
 
     public override void OnSpecialAbility()
@@ -37,12 +35,11 @@ public class Knight : PlayerClass
 
     public override void OnMobilityAbility()
     {
-        
+        Debug.Log("Mobility ability");
+
+        if(Player.PlayerMovement.CanSlide)
+            StartCoroutine(Player.PlayerMovement.PerformSlide());
     }
 
-    private IEnumerator PerformSlide()
-    {
-        Player.RigidBody.AddForce(Player.PlayerMovement.GetMoveDirection() * SlideSpeed);
-        yield return new WaitForSeconds(1f);
-    }
+    
 }

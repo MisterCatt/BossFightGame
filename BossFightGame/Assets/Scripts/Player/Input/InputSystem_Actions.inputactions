@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SecondaryAbility",
+                    "name": "GunAbility",
                     "type": "Button",
                     "id": "bf6e8462-b6e3-4e3b-82fc-f2a7e3e6a074",
                     "expectedControlType": "",
@@ -200,7 +200,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "SecondaryAbility",
+                    "action": "GunAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

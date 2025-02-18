@@ -103,4 +103,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _classData: {fileID: 11400000, guid: 97a495af81a2d2e4abcdbd46f3b16499, type: 2}
   Player: {fileID: 3102724842609228407}
-  SlideSpeed: 5

@@ -16,7 +16,7 @@ public abstract class PlayerClass : MonoBehaviour
     }
 
     public abstract void OnPrimaryAbility();
-    public abstract void OnSecondaryAbility();
+    public abstract void OnGunAbility();
     public abstract void OnSpecialAbility();
     public abstract void OnMobilityAbility();
 }

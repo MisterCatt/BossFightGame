@@ -98,6 +98,7 @@ MonoBehaviour:
   RigidBody: {fileID: 8439721221911966018}
   PlayerClass: {fileID: 0}
   PlayerMovement: {fileID: -6519925208620118221}
+  _targetEnemy: {fileID: 0}
 --- !u!114 &7546721598759730512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b66489c8668cf4a819d1dd676a8ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 3
+  Player: {fileID: 7924746792236376396}
+  MoveState: 0
+  CanSlide: 1
+  _walkingSpeed: 3
+  _moveDirection: {x: 0, y: 0}
+  SlideSpeed: 1000
+  _slideTime: 0.1
 --- !u!50 &8439721221911966018 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 2957140306753624027, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
