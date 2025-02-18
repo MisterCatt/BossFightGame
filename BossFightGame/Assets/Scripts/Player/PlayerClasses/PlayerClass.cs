@@ -4,7 +4,7 @@ public abstract class PlayerClass : MonoBehaviour
 {
     [SerializeField] private SOPlayerClass _classData;
 
-    protected float _basePrimaryDamage, _baseSecondaryDamage, _baseSpecialDamage;
+    protected int _basePrimaryDamage, _baseSecondaryDamage, _baseSpecialDamage;
 
     protected void StartClass()
     {
@@ -14,6 +14,10 @@ public abstract class PlayerClass : MonoBehaviour
 
         Debug.Log("Default class");
     }
+
+    public abstract int GetMeleDamage();
+    public abstract int GetGunDamage();
+    public abstract int GetSpecialDamage();
 
     public abstract void OnPrimaryAbility();
     public abstract void OnGunAbility();

@@ -18,6 +18,21 @@ public class Knight : PlayerClass
         
     }
 
+    public override int GetMeleDamage()
+    {
+        return _basePrimaryDamage;
+    }
+
+    public override int GetGunDamage()
+    {
+        return _baseSecondaryDamage;
+    }
+
+    public override int GetSpecialDamage()
+    {
+        return _baseSpecialDamage;
+    }
+
     public override void OnPrimaryAbility()
     {
         Debug.Log("Primary ability");
@@ -26,6 +41,7 @@ public class Knight : PlayerClass
     public override void OnGunAbility()
     {
         Debug.Log("Gun ability");
+        //Implementing a basic always hitting projectile system
     }
 
     public override void OnSpecialAbility()

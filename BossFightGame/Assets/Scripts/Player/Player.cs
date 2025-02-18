@@ -17,6 +17,9 @@ public class Player : Unit
 
     public GameObject GetCurrentTarget()
     {
+        if (!_targetEnemy)
+           _targetEnemy = UnitManager.Instance.GetTargets()[0];
+
         return !_targetEnemy ? null : _targetEnemy;
     }
     public void ChangeTarget(GameObject newTarget)
