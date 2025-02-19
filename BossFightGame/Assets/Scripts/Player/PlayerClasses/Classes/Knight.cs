@@ -5,6 +5,14 @@ public class Knight : PlayerClass
 {
     public Player Player;
 
+    [Header("Auto aim projectile")]
+    [Space]
+    [SerializeField]
+    protected float _projectileMaxMoveSpeed = 1f;
+    protected float _projectileMaxHeight = 1f;
+    [SerializeField]
+    private AnimationCurve _projectileCurve, _axisCorrectionCurve, _speedCurve;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -42,6 +50,13 @@ public class Knight : PlayerClass
     {
         Debug.Log("Gun ability");
         //Implementing a basic always hitting projectile system
+
+        var projectile = BasicBulletPool.Instance.GetProjectile();
+
+        projectile.gameObject.SetActive(true);
+
+        projectile.InitializeProjectile(Player.GetProjectilePoint().transform, Player.GetCurrentTarget().transform, _projectileMaxMoveSpeed, _projectileMaxHeight);
+        projectile.InitializeAnimationCurve(_projectileCurve, _axisCorrectionCurve, _speedCurve);
     }
 
     public override void OnSpecialAbility()

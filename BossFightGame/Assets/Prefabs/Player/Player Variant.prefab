@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &90314475793699384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098947960343178639}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2098947960343178639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90314475793699384}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4055831500366071976}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6635551353536603801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82,7 +113,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7232503436816789041, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2098947960343178639}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6217317135501693282, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
       insertIndex: -1
@@ -117,6 +151,40 @@ MonoBehaviour:
   PlayerClass: {fileID: 0}
   PlayerMovement: {fileID: -6519925208620118221}
   _targetEnemy: {fileID: 0}
+  _projectileSpawnPoint: {fileID: 90314475793699384}
+  ProjectileCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.001121521
+      value: 0
+      inSlope: 2.004496
+      outSlope: 2.004496
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0.0022480488
+      outSlope: 0.0022480488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &7546721598759730512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +237,11 @@ MonoBehaviour:
 --- !u!58 &1024933457224012258 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 5922089749520676731, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
+  m_PrefabInstance: {fileID: 6635551353536603801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4055831500366071976 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7232503436816789041, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
   m_PrefabInstance: {fileID: 6635551353536603801}
   m_PrefabAsset: {fileID: 0}
 --- !u!58 &7884062592462495275 stripped

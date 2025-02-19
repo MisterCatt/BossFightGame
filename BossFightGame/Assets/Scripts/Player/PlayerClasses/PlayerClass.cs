@@ -6,6 +6,8 @@ public abstract class PlayerClass : MonoBehaviour
 
     protected int _basePrimaryDamage, _baseSecondaryDamage, _baseSpecialDamage;
 
+    
+
     protected void StartClass()
     {
         _basePrimaryDamage = _classData.BasePrimaryDamage;
