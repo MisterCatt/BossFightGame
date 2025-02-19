@@ -980,8 +980,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3354407674634790300, guid: 6ef995c637bddaf4cb6f2d0963b69091, type: 3}
-      propertyPath: _bossWalkSpeed
-      value: 10
+      propertyPath: _minRandomXPosition
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354407674634790300, guid: 6ef995c637bddaf4cb6f2d0963b69091, type: 3}
+      propertyPath: _minRandomYPosition
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

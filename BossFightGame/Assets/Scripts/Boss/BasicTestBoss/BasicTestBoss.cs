@@ -12,6 +12,11 @@ public class BasicTestBoss : MonoBehaviour
     [SerializeField] private int _amountOfDamageCirclesToPlace = 3;
     [SerializeField] private float _timeBetweenCircles = 1;
 
+    [SerializeField] private float _minRandomXPosition = -10f;
+    [SerializeField] private float _maxRandomXPosition = 10f;
+    [SerializeField] private float _minRandomYPosition = -10f;
+    [SerializeField] private float _maxRandomYPosition = 10f;
+
     private void Start()
     {
         boss.AddAttackToAttackPattern(MoveToRandomPosition);
@@ -26,7 +31,7 @@ public class BasicTestBoss : MonoBehaviour
 
     private IEnumerator MoveBossToRandomPosition()
     {
-        var randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10));
+        var randomPosition = new Vector3(Random.Range(_minRandomXPosition, _maxRandomXPosition), Random.Range(_minRandomYPosition, _maxRandomYPosition));
         transform.DOMove(randomPosition, _timeToMoveToTargetPosition);
         yield return new WaitForSeconds(_timeToMoveToTargetPosition);
         boss.AttackOver();
