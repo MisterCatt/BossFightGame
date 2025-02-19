@@ -30,6 +30,7 @@ public class ObjectPool : MonoBehaviour
     public void InstantiateObjects()
     {
         if (!ObjectPrefab) return;
+        if (ObjectsToInstantiate == 0) ObjectsToInstantiate = 10;
 
         for (int i = 0; i < ObjectsToInstantiate; i++)
         {
