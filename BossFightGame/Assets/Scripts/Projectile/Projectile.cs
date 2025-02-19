@@ -7,13 +7,14 @@ public class Projectile : MonoBehaviour
     private Transform _target;
     private float _moveSpeed, _maxMoveSpeed;
 
-    private float _distanceToTargetToDestroyProjectile = 1f, _trajectoryMaxRelativeHeight;
+    private const float DistanceToTargetToDestroyProjectile = 1f;
+    private float _trajectoryMaxRelativeHeight;
 
     private AnimationCurve _projectileCurve, _axisCorrectionCurve, _speedCurve;
 
     private Vector3 _trajectoryStartPoint, _projectileMoveDir, _trajectoryRange;
 
-    private float nextYTrajectoryPosition, nextPositionYCorrectionAbsolute, nextXTrajectoryPosition, nextPositionXCorrectionAbsolute;
+    private float _nextYTrajectoryPosition, _nextPositionYCorrectionAbsolute, _nextXTrajectoryPosition, _nextPositionXCorrectionAbsolute;
 
     public void Update()
     {
@@ -21,7 +22,12 @@ public class Projectile : MonoBehaviour
 
         UpdateProjectilePosition();
 
-        if (Vector3.Distance(transform.position, _target.position) < _distanceToTargetToDestroyProjectile)
+        CheckHit();
+    }
+
+    private void CheckHit()
+    {
+        if (Vector3.Distance(transform.position, _target.position) < DistanceToTargetToDestroyProjectile)
         {
             gameObject.SetActive(false);
         }
@@ -48,28 +54,28 @@ public class Projectile : MonoBehaviour
 
     private void UpdatePositionWithXCurve()
     {
-        float nextPositionY = transform.position.y + _moveSpeed * Time.deltaTime;
-        float nextPositionYNormalized = (nextPositionY - _trajectoryStartPoint.y) / _trajectoryRange.y;
+        var nextPositionY = transform.position.y + _moveSpeed * Time.deltaTime;
+        var nextPositionYNormalized = (nextPositionY - _trajectoryStartPoint.y) / _trajectoryRange.y;
 
-        float nextPositionXNormalized = _projectileCurve.Evaluate(nextPositionYNormalized);
-        nextXTrajectoryPosition = nextPositionXNormalized * _trajectoryMaxRelativeHeight;
+        var nextPositionXNormalized = _projectileCurve.Evaluate(nextPositionYNormalized);
+        _nextXTrajectoryPosition = nextPositionXNormalized * _trajectoryMaxRelativeHeight;
 
 
-        float nextPositionXCorrectionNormalized = _axisCorrectionCurve.Evaluate(nextPositionYNormalized);
-        nextPositionXCorrectionAbsolute = nextPositionXCorrectionNormalized * _trajectoryRange.x;
+        var nextPositionXCorrectionNormalized = _axisCorrectionCurve.Evaluate(nextPositionYNormalized);
+        _nextPositionXCorrectionAbsolute = nextPositionXCorrectionNormalized * _trajectoryRange.x;
 
-        if(_trajectoryRange.x > 0 && _trajectoryRange.y > 0)
+        if(_trajectoryRange is { x: > 0, y: > 0 })
         {
-            nextXTrajectoryPosition = -nextXTrajectoryPosition;
+            _nextXTrajectoryPosition = -_nextXTrajectoryPosition;
         }
 
-        if (_trajectoryRange.x < 0 && _trajectoryRange.y < 0)
+        if (_trajectoryRange is { x: < 0, y: < 0 })
         {
-            nextXTrajectoryPosition = -nextXTrajectoryPosition;
+            _nextXTrajectoryPosition = -_nextXTrajectoryPosition;
         }
 
-        float nextPositionX = _trajectoryStartPoint.x + nextXTrajectoryPosition + nextPositionXCorrectionAbsolute;
-        Vector3 newPosition = new Vector3(nextPositionX, nextPositionY, 0);
+        var nextPositionX = _trajectoryStartPoint.x + _nextXTrajectoryPosition + _nextPositionXCorrectionAbsolute;
+        var newPosition = new Vector3(nextPositionX, nextPositionY, 0);
 
         CalculateProjectileSpeed(nextPositionYNormalized);
         _projectileMoveDir = newPosition - transform.position;
@@ -79,18 +85,18 @@ public class Projectile : MonoBehaviour
 
     private void UpdatePositionWithYCurve()
     {
-        float nextPositionX = transform.position.x + _moveSpeed * Time.deltaTime;
-        float nextPositionXNormalized = (nextPositionX - _trajectoryStartPoint.x) / _trajectoryRange.x;
+        var nextPositionX = transform.position.x + _moveSpeed * Time.deltaTime;
+        var nextPositionXNormalized = (nextPositionX - _trajectoryStartPoint.x) / _trajectoryRange.x;
 
-        float nextPositionYNormalized = _projectileCurve.Evaluate(nextPositionXNormalized);
-        nextYTrajectoryPosition = nextPositionYNormalized * _trajectoryMaxRelativeHeight;
+        var nextPositionYNormalized = _projectileCurve.Evaluate(nextPositionXNormalized);
+        _nextYTrajectoryPosition = nextPositionYNormalized * _trajectoryMaxRelativeHeight;
 
 
-        float nextPositionYCorrectionNormalized = _axisCorrectionCurve.Evaluate(nextPositionXNormalized);
-        nextPositionYCorrectionAbsolute = nextPositionYCorrectionNormalized * _trajectoryRange.y;
+        var nextPositionYCorrectionNormalized = _axisCorrectionCurve.Evaluate(nextPositionXNormalized);
+        _nextPositionYCorrectionAbsolute = nextPositionYCorrectionNormalized * _trajectoryRange.y;
 
-        float nextPositionY = _trajectoryStartPoint.y + nextYTrajectoryPosition + nextPositionYCorrectionAbsolute;
-        Vector3 newPosition = new Vector3(nextPositionX, nextPositionY, 0);
+        var nextPositionY = _trajectoryStartPoint.y + _nextYTrajectoryPosition + _nextPositionYCorrectionAbsolute;
+        var newPosition = new Vector3(nextPositionX, nextPositionY, 0);
 
         CalculateProjectileSpeed(nextPositionXNormalized);
         _projectileMoveDir = newPosition - transform.position;
@@ -100,7 +106,7 @@ public class Projectile : MonoBehaviour
 
     private void CalculateProjectileSpeed(float nextPositionXNormalized)
     {
-        float nextMoveSpeedNormalized = _speedCurve.Evaluate(nextPositionXNormalized);
+        var nextMoveSpeedNormalized = _speedCurve.Evaluate(nextPositionXNormalized);
 
         _moveSpeed = nextMoveSpeedNormalized * _maxMoveSpeed;
     }
@@ -113,7 +119,7 @@ public class Projectile : MonoBehaviour
         this._target = target;
         this._maxMoveSpeed = maxMoveSpeed;
 
-        float xDistanceToTarget = target.position.x - transform.position.x;
+        var xDistanceToTarget = target.position.x - transform.position.x;
         this._trajectoryMaxRelativeHeight = Mathf.Abs(xDistanceToTarget) * trajectoryMaxHeight;
 
         _projectileVisual.SetTarget(target);
@@ -133,21 +139,21 @@ public class Projectile : MonoBehaviour
 
     public float GetNextYTrajectoryPosition()
     {
-        return nextYTrajectoryPosition;
+        return _nextYTrajectoryPosition;
     }
 
     public float GetNextPositionYCorrectionAbsolute()
     {
-        return nextPositionYCorrectionAbsolute;
+        return _nextPositionYCorrectionAbsolute;
     }
 
     public float GetNextXTrajectoryPosition()
     {
-        return nextXTrajectoryPosition;
+        return _nextXTrajectoryPosition;
     }
 
     public float GetNextPositionXCorrectionAbsolute()
     {
-        return nextPositionXCorrectionAbsolute;
+        return _nextPositionXCorrectionAbsolute;
     }
 }
