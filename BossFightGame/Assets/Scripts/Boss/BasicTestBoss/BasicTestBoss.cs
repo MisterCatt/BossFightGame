@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class BasicTestBoss : MonoBehaviour
@@ -7,31 +8,26 @@ public class BasicTestBoss : MonoBehaviour
 
     public Boss boss;
 
-    private Vector3 targetMovePosition;
-    [SerializeField] private float _bossWalkSpeed;
+    [SerializeField] private float _timeToMoveToTargetPosition = 3f;
+    [SerializeField] private int _amountOfDamageCirclesToPlace = 3;
 
     private void Start()
     {
-        targetMovePosition = transform.position;
         boss.AddAttackToAttackPattern(MoveToRandomPosition);
         boss.AddAttackToAttackPattern(LaserThroughMiddle);
-    }
-
-    private void Update()
-    {
-        var step = _bossWalkSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetMovePosition, step);
+        boss.AddAttackToAttackPattern(PlaceDamageCirclesUnderPlayer);
     }
 
     public void MoveToRandomPosition()
     {
-        StartCoroutine(SetMovePosition());
+        StartCoroutine(MoveBossToRandomPosition());
     }
 
-    private IEnumerator SetMovePosition()
+    private IEnumerator MoveBossToRandomPosition()
     {
-        targetMovePosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10));
-        yield return new WaitForSeconds(2f);
+        var randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10));
+        transform.DOMove(randomPosition, _timeToMoveToTargetPosition);
+        yield return new WaitForSeconds(_timeToMoveToTargetPosition);
         boss.AttackOver();
     }
 
@@ -48,6 +44,27 @@ public class BasicTestBoss : MonoBehaviour
         yield return new WaitForSeconds(3f);
         preLaserField.SetActive(false);
         Laser.SetActive(false);
+        boss.AttackOver();
+    }
+
+    public void PlaceDamageCirclesUnderPlayer()
+    {
+        StartCoroutine(PlaceCircles());
+    }
+
+    private IEnumerator PlaceCircles()
+    {
+        for (int i = 0; i < _amountOfDamageCirclesToPlace; i++)
+        {
+            var circle = TimedDamageCirclePool.Instance.GetObject();
+            circle.gameObject.SetActive(true);
+
+            circle.transform.position = PlayerManager.Instance.GetPlayer().transform.position;
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        yield return new WaitForSeconds(_amountOfDamageCirclesToPlace);
         boss.AttackOver();
     }
 
