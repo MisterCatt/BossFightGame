@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectPrefab: {fileID: 2181805653048395475, guid: a64eb132470f36342826e1f7c01bdd6c, type: 3}
   ObjectsInPool: []
+  ObjectsToInstantiate: 3

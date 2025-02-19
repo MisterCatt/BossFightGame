@@ -10,6 +10,7 @@ public class BasicTestBoss : MonoBehaviour
 
     [SerializeField] private float _timeToMoveToTargetPosition = 3f;
     [SerializeField] private int _amountOfDamageCirclesToPlace = 3;
+    [SerializeField] private float _timeBetweenCircles = 1;
 
     private void Start()
     {
@@ -61,7 +62,7 @@ public class BasicTestBoss : MonoBehaviour
 
             circle.transform.position = PlayerManager.Instance.GetPlayer().transform.position;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(_timeBetweenCircles);
         }
 
         yield return new WaitForSeconds(_amountOfDamageCirclesToPlace);

@@ -7,9 +7,11 @@ public class ObjectPool : MonoBehaviour
     [SerializeField]
     protected GameObject ObjectPrefab;
 
+    [SerializeField] protected int ObjectsToInstantiate = 10;
     [SerializeField]
     [Header("Just info, no touch")]
     protected List<GameObject> ObjectsInPool;
+
 
     public GameObject GetObject()
     {
@@ -29,7 +31,7 @@ public class ObjectPool : MonoBehaviour
     {
         if (!ObjectPrefab) return;
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < ObjectsToInstantiate; i++)
         {
             var projectile = Instantiate(ObjectPrefab, transform);
             ObjectsInPool.Add(projectile);
