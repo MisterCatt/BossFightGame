@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private Player _player1;
 
-    [SerializeField] private CinemachineCamera _cineCamera;
     [SerializeField] private Slider _PlayerHealthSlider;
     [SerializeField] private TMP_Text _PlayerHealthSliderText;
 
@@ -38,7 +37,6 @@ public class PlayerManager : MonoBehaviour
     public void SetPlayer(Player player)
     {
         _player1 = player;
-        _cineCamera.Follow = _player1.transform;
         _player1.OnUnitHeal += UpdatePlayerHealthbar;
         _player1.OnUnitTakeDamage += UpdatePlayerHealthbar;
         _player1.OnUnitDeath += PlayerDied;

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,12 +6,12 @@ public class BossManager : MonoBehaviour
 {
     public static BossManager Instance;
 
-    public List<Boss> BossesInLevel;
-
-    int totalBossHealth = 100, currentBossHealth;
+    [SerializeField]
+    private Boss _boss;
 
     [SerializeField] private Slider _BossHealthSlider;
     [SerializeField] private TMP_Text _BossHealthSliderText;
+
 
     private void Awake()
     {
@@ -22,35 +21,41 @@ public class BossManager : MonoBehaviour
             Instance = this;
     }
 
-    public void AddBossToLevel(Boss boss)
+    public void SetBoss(Boss boss)
     {
-        BossesInLevel.Add(boss);
+        _boss = boss;
+        _boss.OnUnitTakeDamage += UpdateHealthbar;
+        _boss.OnUnitDeath += BossDied;
 
-        boss.OnUnitTakeDamage += UpdateBossHealthBar;
-
-        SetBossHealthbar();
     }
 
-    public void SetBossHealthbar()
+    /// <summary>
+    /// Changes the player health slider to the correct ammount of health the player has.
+    /// If the value is -1 the healthbar is set to 0.
+    /// </summary>
+    /// <param name="value">the ammount that changed (both up and down)</param>
+    public void UpdateHealthbar(int value)
     {
-        totalBossHealth = 0;
-        foreach (Boss bo in BossesInLevel)
-            totalBossHealth += bo.GetCurrentHealth();
+        _BossHealthSlider.value = _boss.GetCurrentHealth();
+        _BossHealthSliderText.text = _BossHealthSlider.value + "/100";
 
-        currentBossHealth = totalBossHealth;
-
-        _BossHealthSliderText.text = totalBossHealth.ToString()+"/"+totalBossHealth.ToString();
-
-        _BossHealthSlider.maxValue = totalBossHealth;
-        _BossHealthSlider.value = totalBossHealth;
+        if (value == -1)
+        {
+            _BossHealthSlider.value = 0;
+            _BossHealthSliderText.text = "0/100";
+        }
     }
 
-    private void UpdateBossHealthBar(int value)
+    private void BossDied()
     {
-        Debug.Log("DAMAGE: " + value);
-        _BossHealthSlider.value += value;
-        currentBossHealth += value;
-        _BossHealthSliderText.text = currentBossHealth + "/" + totalBossHealth.ToString();
+        UpdateHealthbar(-1);
+        UnsubscribeToEvents();
+        _boss = null;
     }
 
+    private void UnsubscribeToEvents()
+    {
+        _boss.OnUnitDeath -= BossDied;
+        _boss.OnUnitTakeDamage -= UpdateHealthbar;
+    }
 }
