@@ -13,6 +13,10 @@ public class Knight : PlayerClass
     [SerializeField]
     private AnimationCurve _projectileCurve, _axisCorrectionCurve, _speedCurve;
 
+    private bool _canShoot = true;
+    [SerializeField]
+    private float _shootCooldownTimeSeconds = 1f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -52,6 +56,7 @@ public class Knight : PlayerClass
     {
         Debug.Log("Gun ability");
         //Implementing a basic always hitting projectile system
+        if (!_canShoot) return;
 
         var projectile = BasicBulletPool.Instance.GetProjectile();
 
@@ -59,6 +64,8 @@ public class Knight : PlayerClass
 
         projectile.InitializeProjectile(Player.GetProjectilePoint().transform, Player.GetShootTargetPosition().transform, _projectileMaxMoveSpeed, _projectileMaxHeight);
         projectile.InitializeAnimationCurve(_projectileCurve, _axisCorrectionCurve, _speedCurve);
+
+        StartCoroutine(ShootCooldown());
     }
 
     public override void OnSpecialAbility()
@@ -76,5 +83,10 @@ public class Knight : PlayerClass
         Player.GetPlayerAnimator().SetTrigger("Slide");
     }
 
-    
+    public IEnumerator ShootCooldown()
+    {
+        _canShoot = false;
+        yield return new WaitForSeconds(_shootCooldownTimeSeconds);
+        _canShoot = true;
+    }
 }
