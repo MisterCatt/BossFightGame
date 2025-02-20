@@ -154,6 +154,7 @@ MonoBehaviour:
   _projectileVisual: {fileID: 7336351112488175063}
   _projectileShadow: {fileID: 0}
   _projectile: {fileID: 1103067360846400740}
+  TrajectoryStartPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2289440400587638616
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +168,7 @@ GameObject:
   - component: {fileID: 6256884956701516354}
   - component: {fileID: 1475804224238777286}
   - component: {fileID: 4760368241574815195}
+  - component: {fileID: 2009986760466540603}
   m_Layer: 7
   m_Name: BasicBullet
   m_TagString: Untagged
@@ -231,10 +233,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1608164643
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bf2a7bc626bdb40adac0b5f94edeaca6, type: 3}
   m_Color: {r: 0.608826, g: 0, b: 0.6132076, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -309,3 +311,26 @@ MonoBehaviour:
   _projectileVisual: {fileID: 621669562388474047}
   _projectileShadow: {fileID: 7336351112488175063}
   _projectile: {fileID: 1475804224238777286}
+  TrajectoryStartPosition: {x: 0, y: 0, z: 0}
+--- !u!95 &2009986760466540603
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2289440400587638616}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bfa1f197800da41f29dee560ee391cae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

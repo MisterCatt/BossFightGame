@@ -57,7 +57,7 @@ public class Knight : PlayerClass
 
         projectile.gameObject.SetActive(true);
 
-        projectile.InitializeProjectile(Player.GetProjectilePoint().transform, Player.GetCurrentTarget().transform, _projectileMaxMoveSpeed, _projectileMaxHeight);
+        projectile.InitializeProjectile(Player.GetProjectilePoint().transform, Player.GetShootTargetPosition().transform, _projectileMaxMoveSpeed, _projectileMaxHeight);
         projectile.InitializeAnimationCurve(_projectileCurve, _axisCorrectionCurve, _speedCurve);
     }
 

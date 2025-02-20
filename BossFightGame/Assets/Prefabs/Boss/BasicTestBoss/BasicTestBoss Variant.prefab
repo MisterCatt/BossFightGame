@@ -106,9 +106,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: 1377679985
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -226,9 +226,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: 1377679985
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8113208, g: 0.3716506, b: 0, a: 0.34117648}
   m_FlipX: 0
@@ -313,9 +313,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: 1377679985
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -400,9 +400,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: 1377679985
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8113208, g: 0.3716506, b: 0, a: 0.34117648}
   m_FlipX: 0
@@ -460,8 +460,8 @@ PrefabInstance:
       value: BasicTestBoss Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6435536104785838280, guid: 707aca70730456049bb326f11014d72b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8527469832862967079, guid: 707aca70730456049bb326f11014d72b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -534,7 +534,13 @@ MonoBehaviour:
   Laser: {fileID: 5459670821644911721}
   preLaserField: {fileID: 3181147536959139940}
   boss: {fileID: 4685753824090388301}
-  _bossWalkSpeed: 10
+  _timeToMoveToTargetPosition: 3
+  _amountOfDamageCirclesToPlace: 3
+  _timeBetweenCircles: 1
+  _minRandomXPosition: -10
+  _maxRandomXPosition: 10
+  _minRandomYPosition: -10
+  _maxRandomYPosition: 10
 --- !u!4 &2575119002225215615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8527469832862967079, guid: 707aca70730456049bb326f11014d72b, type: 3}
