@@ -18,7 +18,7 @@ MonoBehaviour:
   SecondaryAbilityImage: {fileID: 0}
   SpecialAbilityImage: {fileID: 0}
   MobilityAbilityImage: {fileID: 0}
-  BasePrimaryDamage: 100
+  BasePrimaryDamage: 10
   BaseSecondaryDamage: 50
   BaseSpecialDamage: 150
   ClassName: Knight

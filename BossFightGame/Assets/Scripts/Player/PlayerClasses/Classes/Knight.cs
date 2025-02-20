@@ -48,8 +48,15 @@ public class Knight : PlayerClass
     public override void OnPrimaryAbility()
     {
         Debug.Log("Primary ability");
+        StartCoroutine(DoMeleHit());
+    }
 
+    IEnumerator DoMeleHit()
+    {
+        Player.GetMeleHitbox().SetActive(true);
         Player.GetPlayerAnimator().SetTrigger("Attack");
+        yield return new WaitForSeconds(0.1f);
+        Player.GetMeleHitbox().SetActive(false);
     }
 
     public override void OnGunAbility()

@@ -27,6 +27,8 @@ public class BossManager : MonoBehaviour
         BossesInLevel.Add(boss);
 
         boss.OnUnitTakeDamage += UpdateBossHealthBar;
+
+        SetBossHealthbar();
     }
 
     public void SetBossHealthbar()
@@ -45,6 +47,7 @@ public class BossManager : MonoBehaviour
 
     private void UpdateBossHealthBar(int value)
     {
+        Debug.Log("DAMAGE: " + value);
         _BossHealthSlider.value += value;
         currentBossHealth += value;
         _BossHealthSliderText.text = currentBossHealth + "/" + totalBossHealth.ToString();

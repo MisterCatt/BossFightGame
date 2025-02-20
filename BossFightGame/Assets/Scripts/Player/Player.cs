@@ -10,7 +10,7 @@ public class Player : Unit, IHealable
     public PlayerMovement PlayerMovement;
 
     [SerializeField] private Transform _shootTargetPosition;
-    [SerializeField] private GameObject _projectileSpawnPoint;
+    [SerializeField] private GameObject _projectileSpawnPoint, _MeleHitbox;
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private SpriteRenderer _PlayerSpriteRenderer;
 
@@ -30,15 +30,22 @@ public class Player : Unit, IHealable
     private void Update()
     {
         if(GetCurrentTarget().transform.position.x < transform.position.x)
+        {
             _PlayerSpriteRenderer.flipX = true;
+            _MeleHitbox.transform.localPosition = new Vector2(-0.5f,0);
+        }
         else
+        {
             _PlayerSpriteRenderer.flipX = false;
+            _MeleHitbox.transform.localPosition = new Vector2(0.5f, 0);
+        }
 
         if (Input.GetKeyDown(KeyCode.P)) TakeDamage(10);
         if (Input.GetKeyDown(KeyCode.O)) HealUnit(10);
     }
 
     public GameObject GetProjectilePoint() => _projectileSpawnPoint;
+    public GameObject GetMeleHitbox() => _MeleHitbox;
     public Animator GetPlayerAnimator() => _playerAnimator;
 
     public GameObject GetCurrentTarget()

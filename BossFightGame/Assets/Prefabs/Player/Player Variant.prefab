@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4336096004390541132, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5424364551898368990, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
       propertyPath: m_Color.b
@@ -277,9 +277,11 @@ MonoBehaviour:
   RigidBody: {fileID: 8439721221911966018}
   ColliderBox: {fileID: 7884062592462495275}
   TriggerBox: {fileID: 1024933457224012258}
+  Health: 100
   PlayerMovement: {fileID: -6519925208620118221}
   _shootTargetPosition: {fileID: 6322850948557971822}
   _projectileSpawnPoint: {fileID: 90314475793699384}
+  _MeleHitbox: {fileID: 1851235571255415412}
   _playerAnimator: {fileID: 7873422170644692634}
   _PlayerSpriteRenderer: {fileID: 1680124267728399687}
   PlayerClass: {fileID: 0}

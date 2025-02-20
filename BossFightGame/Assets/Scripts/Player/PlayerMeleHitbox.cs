@@ -6,7 +6,7 @@ public class PlayerMeleHitbox : MonoBehaviour
     [SerializeField] Player player;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable damageable = collision.GetComponent<IDamageable>();
+        IDamageable damageable = collision.GetComponentInParent<IDamageable>();
 
         if (damageable == null) return;
 

@@ -32,10 +32,7 @@ public class Boss : Unit, ITargetable
             UnitManager.Instance.BossesInLevel.Add(gameObject);
 
         if (BossManager.Instance)
-        {
-            BossManager.Instance.BossesInLevel.Add(this);
-            BossManager.Instance.SetBossHealthbar();
-        }
+            BossManager.Instance.BossesInLevel.Add(gameObject.GetComponent<Boss>());
 
         yield return new WaitForSeconds(3f);
         Debug.Log("first attack");
