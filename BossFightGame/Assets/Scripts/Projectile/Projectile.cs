@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     private Transform _target;
     private float _moveSpeed, _maxMoveSpeed;
 
-    private const float DistanceToTargetToDestroyProjectile = 1f;
+    private const float DistanceToTargetToDestroyProjectile = 0.1f;
     private float _trajectoryMaxRelativeHeight;
 
     private AnimationCurve _projectileCurve, _axisCorrectionCurve, _speedCurve;
@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour
 
     private float _nextYTrajectoryPosition, _nextPositionYCorrectionAbsolute, _nextXTrajectoryPosition, _nextPositionXCorrectionAbsolute;
 
+    public int projectileDamage = 10;
+
     public void Update()
     {
         if(!_target) return;
@@ -23,6 +25,16 @@ public class Projectile : MonoBehaviour
         UpdateProjectilePosition();
 
         CheckHit();
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        IDamageable damageTarget = collision.GetComponentInParent<IDamageable>();
+        if (damageTarget != null)
+        {
+            damageTarget.TakeDamage(projectileDamage);
+            gameObject.SetActive(false);
+        }
     }
 
     private void CheckHit()
@@ -111,13 +123,14 @@ public class Projectile : MonoBehaviour
         _moveSpeed = nextMoveSpeedNormalized * _maxMoveSpeed;
     }
 
-    public void InitializeProjectile(Transform spawnPoint, Transform target, float maxMoveSpeed, float trajectoryMaxHeight)
+    public void InitializeProjectile(Transform spawnPoint, Transform target, float maxMoveSpeed, float trajectoryMaxHeight, int theProjectilesDamage = 10)
     {
         this._trajectoryStartPoint = spawnPoint.position;
         transform.position = spawnPoint.position;
         _projectileVisual.TrajectoryStartPosition = spawnPoint.position;
         this._target = target;
         this._maxMoveSpeed = maxMoveSpeed;
+        this.projectileDamage = theProjectilesDamage;
 
         var xDistanceToTarget = target.position.x - transform.position.x;
         this._trajectoryMaxRelativeHeight = Mathf.Abs(xDistanceToTarget) * trajectoryMaxHeight;
