@@ -152,39 +152,7 @@ MonoBehaviour:
   PlayerMovement: {fileID: -6519925208620118221}
   _targetEnemy: {fileID: 0}
   _projectileSpawnPoint: {fileID: 90314475793699384}
-  ProjectileCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.001121521
-      value: 0
-      inSlope: 2.004496
-      outSlope: 2.004496
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0.0022480488
-      outSlope: 0.0022480488
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2
-      outSlope: -2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _playerAnimator: {fileID: 7873422170644692634}
 --- !u!114 &7546721598759730512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +210,11 @@ CircleCollider2D:
 --- !u!4 &4055831500366071976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7232503436816789041, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
+  m_PrefabInstance: {fileID: 6635551353536603801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7873422170644692634 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3553961824449681411, guid: c6ebd12a7fe076e4f839318066f3da65, type: 3}
   m_PrefabInstance: {fileID: 6635551353536603801}
   m_PrefabAsset: {fileID: 0}
 --- !u!58 &7884062592462495275 stripped

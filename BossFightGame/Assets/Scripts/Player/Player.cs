@@ -9,6 +9,7 @@ public class Player : Unit
 
     [SerializeField] private GameObject _targetEnemy;
     [SerializeField] private GameObject _projectileSpawnPoint;
+    [SerializeField] private Animator _playerAnimator;
 
     private void Start()
     {
@@ -16,10 +17,8 @@ public class Player : Unit
             PlayerManager.Instance.SetPlayer(this);
     }
 
-    public GameObject GetProjectilePoint()
-    {
-        return _projectileSpawnPoint;
-    }
+    public GameObject GetProjectilePoint() => _projectileSpawnPoint;
+    public Animator GetPlayerAnimator() => _playerAnimator;
 
     public GameObject GetCurrentTarget()
     {
@@ -32,4 +31,6 @@ public class Player : Unit
     {
         _targetEnemy = newTarget;
     }
+
+    
 }

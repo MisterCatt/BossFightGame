@@ -28,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         if (MoveState == PlayerMoveState.SLIDING) return;
         MoveState = _moveDirection == new Vector2() ? PlayerMoveState.STILL : PlayerMoveState.MOVING;
         rb.linearVelocity = _moveDirection * _walkingSpeed;
+
+        if(MoveState == PlayerMoveState.MOVING)
+            Player.GetPlayerAnimator().SetBool("Running", true);
+        else
+            Player.GetPlayerAnimator().SetBool("Running", false);
     }
 
     public Vector2 GetMoveDirection()

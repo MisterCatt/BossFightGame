@@ -44,6 +44,8 @@ public class Knight : PlayerClass
     public override void OnPrimaryAbility()
     {
         Debug.Log("Primary ability");
+
+        Player.GetPlayerAnimator().SetTrigger("Attack");
     }
 
     public override void OnGunAbility()
@@ -70,6 +72,8 @@ public class Knight : PlayerClass
 
         if(Player.PlayerMovement.CanSlide)
             StartCoroutine(Player.PlayerMovement.PerformSlide());
+
+        Player.GetPlayerAnimator().SetTrigger("Slide");
     }
 
     

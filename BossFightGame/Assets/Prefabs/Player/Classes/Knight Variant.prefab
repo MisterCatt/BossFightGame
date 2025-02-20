@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7873422170644692634, guid: c2062b89509acc740948721979bf5fde, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 312496b25d842af4a938e96c7d5aaee0, type: 2}
     - target: {fileID: 7924746792236376396, guid: c2062b89509acc740948721979bf5fde, type: 3}
       propertyPath: RigidBody
       value: 
@@ -103,3 +107,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _classData: {fileID: 11400000, guid: 97a495af81a2d2e4abcdbd46f3b16499, type: 2}
   Player: {fileID: 3102724842609228407}
+  _projectileMaxMoveSpeed: 1
+  _projectileCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _axisCorrectionCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _speedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
