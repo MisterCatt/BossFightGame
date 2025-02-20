@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player : Unit, IHealable
 {
+    public enum TargetDirection { Left, Right, Up, Down }
+    public TargetDirection DirectionToTarget = TargetDirection.Right;
+
     [Header("Player class")]
     [Space]
     [Header("Manual assignment")]
@@ -31,13 +34,13 @@ public class Player : Unit, IHealable
     {
         if(GetCurrentTarget().transform.position.x < transform.position.x)
         {
+            DirectionToTarget = TargetDirection.Left;
             _PlayerSpriteRenderer.flipX = true;
-            _MeleHitbox.transform.localPosition = new Vector2(-0.5f,0);
         }
         else
         {
+            DirectionToTarget = TargetDirection.Right;
             _PlayerSpriteRenderer.flipX = false;
-            _MeleHitbox.transform.localPosition = new Vector2(0.5f, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.P)) TakeDamage(10);

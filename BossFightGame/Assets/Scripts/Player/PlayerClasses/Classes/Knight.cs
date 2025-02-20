@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Knight : PlayerClass
 {
-    public Player Player;
+    public Player ParentPlayer;
 
     [Header("Auto aim projectile")]
     [Space]
@@ -48,15 +48,22 @@ public class Knight : PlayerClass
     public override void OnPrimaryAbility()
     {
         Debug.Log("Primary ability");
-        StartCoroutine(DoMeleHit());
-    }
 
-    IEnumerator DoMeleHit()
-    {
-        Player.GetMeleHitbox().SetActive(true);
-        Player.GetPlayerAnimator().SetTrigger("Attack");
-        yield return new WaitForSeconds(0.1f);
-        Player.GetMeleHitbox().SetActive(false);
+        float positionModifier = 0.5f;
+
+        if(ParentPlayer.DirectionToTarget == Player.TargetDirection.Left)
+        {
+            positionModifier = -positionModifier;
+        }
+
+        Collider2D meleAttackArea = Physics2D.OverlapCircle(new Vector2(transform.position.x + positionModifier, transform.position.y), 1f, LayerMask.GetMask("Boss"));
+
+        if (meleAttackArea)
+        {
+            meleAttackArea.GetComponentInParent<IDamageable>().TakeDamage(GetMeleDamage());
+        }
+
+        ParentPlayer.GetPlayerAnimator().SetTrigger("Attack");
     }
 
     public override void OnGunAbility()
@@ -69,7 +76,7 @@ public class Knight : PlayerClass
 
         projectile.gameObject.SetActive(true);
 
-        projectile.InitializeProjectile(Player.GetProjectilePoint().transform, Player.GetShootTargetPosition().transform, _projectileMaxMoveSpeed, _projectileMaxHeight);
+        projectile.InitializeProjectile(ParentPlayer.GetProjectilePoint().transform, ParentPlayer.GetShootTargetPosition().transform, _projectileMaxMoveSpeed, _projectileMaxHeight);
         projectile.InitializeAnimationCurve(_projectileCurve, _axisCorrectionCurve, _speedCurve);
 
         StartCoroutine(ShootCooldown());
@@ -84,10 +91,10 @@ public class Knight : PlayerClass
     {
         Debug.Log("Mobility ability");
 
-        if(Player.PlayerMovement.CanSlide)
-            StartCoroutine(Player.PlayerMovement.PerformSlide());
+        if(ParentPlayer.PlayerMovement.CanSlide)
+            StartCoroutine(ParentPlayer.PlayerMovement.PerformSlide());
 
-        Player.GetPlayerAnimator().SetTrigger("Slide");
+        ParentPlayer.GetPlayerAnimator().SetTrigger("Slide");
     }
 
     public IEnumerator ShootCooldown()
