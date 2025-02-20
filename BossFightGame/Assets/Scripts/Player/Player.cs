@@ -12,13 +12,12 @@ public class Player : Unit, IHealable
     [SerializeField] private Transform _shootTargetPosition;
     [SerializeField] private GameObject _projectileSpawnPoint;
     [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private SpriteRenderer _PlayerSpriteRenderer;
 
     [Header("Automatic assignment, dont touch")]
     [Space]
     public PlayerClass PlayerClass;
     [SerializeField] private GameObject _targetEnemy;
-
-    public event Action<int> OnPlayerTakeDamage, OnPlayerHeal;
 
     private void Start()
     {
@@ -30,6 +29,11 @@ public class Player : Unit, IHealable
 
     private void Update()
     {
+        if(GetCurrentTarget().transform.position.x < transform.position.x)
+            _PlayerSpriteRenderer.flipX = true;
+        else
+            _PlayerSpriteRenderer.flipX = false;
+
         if (Input.GetKeyDown(KeyCode.P)) TakeDamage(10);
         if (Input.GetKeyDown(KeyCode.O)) HealUnit(10);
     }
@@ -58,17 +62,5 @@ public class Player : Unit, IHealable
     public void ChangeTarget(GameObject newTarget)
     {
         _targetEnemy = newTarget;
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-        OnPlayerTakeDamage?.Invoke(damage);
-    }
-
-    public override void HealUnit(int healAmmount)
-    {
-        base.HealUnit(healAmmount);
-        OnPlayerHeal?.Invoke(healAmmount);
     }
 }

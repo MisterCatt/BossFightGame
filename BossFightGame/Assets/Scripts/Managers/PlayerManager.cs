@@ -39,8 +39,8 @@ public class PlayerManager : MonoBehaviour
     {
         _player1 = player;
         _cineCamera.Follow = _player1.transform;
-        _player1.OnPlayerHeal += SetPlayerHealthbar;
-        _player1.OnPlayerTakeDamage += SetPlayerHealthbar;
+        _player1.OnUnitHeal += UpdatePlayerHealthbar;
+        _player1.OnUnitTakeDamage += UpdatePlayerHealthbar;
         _player1.OnUnitDeath += PlayerDied;
 
     }
@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
     /// If the value is -1 the healthbar is set to 0.
     /// </summary>
     /// <param name="value">the ammount that changed (both up and down)</param>
-    public void SetPlayerHealthbar(int value)
+    public void UpdatePlayerHealthbar(int value)
     {
         _PlayerHealthSlider.value = _player1.GetCurrentHealth();
         _PlayerHealthSliderText.text = _PlayerHealthSlider.value + "/100";
@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerDied()
     {
-        SetPlayerHealthbar(-1);
+        UpdatePlayerHealthbar(-1);
         UnsubscribeToPlayerEvents();
         _player1 = null;
     }
@@ -72,8 +72,8 @@ public class PlayerManager : MonoBehaviour
     private void UnsubscribeToPlayerEvents()
     {
         _player1.OnUnitDeath -= PlayerDied;
-        _player1.OnPlayerHeal -= SetPlayerHealthbar;
-        _player1.OnPlayerTakeDamage -= SetPlayerHealthbar;
+        _player1.OnUnitHeal -= UpdatePlayerHealthbar;
+        _player1.OnUnitTakeDamage -= UpdatePlayerHealthbar;
     }
 
 }

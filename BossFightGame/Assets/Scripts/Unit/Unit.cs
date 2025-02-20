@@ -8,17 +8,20 @@ public abstract class Unit : MonoBehaviour, IDamageable, IHealable
     [Space]
     public Rigidbody2D RigidBody;
     public Collider2D ColliderBox, TriggerBox;
+    [SerializeField]
     protected int Health = 100;
 
     public event Action OnUnitDeath;
-
+    public event Action<int> OnUnitTakeDamage, OnUnitHeal;
     public int GetCurrentHealth() => Health;
 
     public virtual void TakeDamage(int damage)
     {
         Health -= damage;
 
-        if(Health <= 0)
+        OnUnitTakeDamage?.Invoke(-damage);
+
+        if (Health <= 0)
             Death();
     }
 
@@ -32,11 +35,17 @@ public abstract class Unit : MonoBehaviour, IDamageable, IHealable
     {
         if (Health >= 100) return;
 
-        if(healAmmount + Health > 100)
+        if (healAmmount + Health > 100)
         {
             Health += healAmmount - Health;
+            OnUnitHeal?.Invoke(healAmmount - Health);
         }
         else
+        {
             Health += healAmmount;
+            OnUnitHeal?.Invoke(healAmmount);
+        }
+
+        
     }
 }

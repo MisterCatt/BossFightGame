@@ -14,6 +14,8 @@ public class Boss : Unit, ITargetable
 
     public bool AttackPatternShouldLoop = true;
 
+    
+
     private void Awake()
     {
         _attackPattern = new List<Action>();
@@ -28,6 +30,12 @@ public class Boss : Unit, ITargetable
     {
         if(UnitManager.Instance) 
             UnitManager.Instance.BossesInLevel.Add(gameObject);
+
+        if (BossManager.Instance)
+        {
+            BossManager.Instance.BossesInLevel.Add(this);
+            BossManager.Instance.SetBossHealthbar();
+        }
 
         yield return new WaitForSeconds(3f);
         Debug.Log("first attack");
