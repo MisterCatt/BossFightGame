@@ -60,14 +60,16 @@ public class BasicTestBoss : MonoBehaviour
 
     private IEnumerator PlaceCircles()
     {
-        for (int i = 0; i < _amountOfDamageCirclesToPlace; i++)
-        {
-            var circle = TimedDamageCirclePool.Instance.GetObject();
-            circle.gameObject.SetActive(true);
+        if (PlayerManager.Instance.GetPlayer()){
+            for (int i = 0; i < _amountOfDamageCirclesToPlace; i++)
+            {
+                var circle = TimedDamageCirclePool.Instance.GetObject();
+                circle.gameObject.SetActive(true);
 
-            circle.transform.position = PlayerManager.Instance.GetPlayer().transform.position;
+                circle.transform.position = PlayerManager.Instance.GetPlayer().transform.position;
 
-            yield return new WaitForSeconds(_timeBetweenCircles);
+                yield return new WaitForSeconds(_timeBetweenCircles);
+            }
         }
 
         yield return new WaitForSeconds(_amountOfDamageCirclesToPlace);

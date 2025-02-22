@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : Singleton<PlayerManager>
 {
-    public static PlayerManager Instance;
-
     public List<GameObject> AllUnlockedClasses, AllLockedClasses, AllClasses;
 
     [SerializeField]
@@ -16,23 +13,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Slider _PlayerHealthSlider;
     [SerializeField] private TMP_Text _PlayerHealthSliderText;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-            Destroy(gameObject);
-        else
-            Instance = this;
-    }
-
     private void OnDisable()
     {
         UnsubscribeToPlayerEvents();
     }
 
-    public Player GetPlayer()
-    {
-        return _player1;
-    }
+    public Player GetPlayer() => _player1 ? _player1 : null;
 
     public void SetPlayer(Player player)
     {
@@ -65,10 +51,13 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayerHealthbar(-1);
         UnsubscribeToPlayerEvents();
         _player1 = null;
+
+        GameManager.ToggleDeathScene(true);
     }
 
     private void UnsubscribeToPlayerEvents()
     {
+        if (!GetPlayer()) return;
         _player1.OnUnitDeath -= PlayerDied;
         _player1.OnUnitHeal -= UpdatePlayerHealthbar;
         _player1.OnUnitTakeDamage -= UpdatePlayerHealthbar;

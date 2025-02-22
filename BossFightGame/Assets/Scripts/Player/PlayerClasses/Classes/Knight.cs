@@ -29,7 +29,6 @@ public class Knight : PlayerClass
     {
         
     }
-
     public override int GetMeleDamage()
     {
         return _basePrimaryDamage;

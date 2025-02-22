@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,8 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public Player Player;
 
-    public enum PlayerMoveState{STILL, MOVING, SLIDING}
+    public enum PlayerMoveState{STILL, MOVING, SLIDING, SPAWNING}
     public PlayerMoveState MoveState = PlayerMoveState.STILL;
+
+    [SerializeField] private Transform _SpawnTargetLocation;
+    [SerializeField] private float _WalkToSpawnTargetLocationTime = 2f;
 
     public bool CanSlide = true;
 
@@ -21,11 +25,22 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(SpawnPlayer());
+    }
+
+    private IEnumerator SpawnPlayer()
+    {
+        MoveState = PlayerMoveState.SPAWNING;
+        _SpawnTargetLocation.parent = null;
+        transform.DOMove(_SpawnTargetLocation.position, _WalkToSpawnTargetLocationTime);
+        yield return new WaitForSeconds(_WalkToSpawnTargetLocationTime);
+        MoveState = PlayerMoveState.STILL;
+        Destroy(_SpawnTargetLocation.gameObject);
     }
 
     private void Update()
     {
-        if (MoveState == PlayerMoveState.SLIDING) return;
+        if (MoveState == PlayerMoveState.SLIDING || MoveState == PlayerMoveState.SPAWNING) return;
         MoveState = _moveDirection == new Vector2() ? PlayerMoveState.STILL : PlayerMoveState.MOVING;
         rb.linearVelocity = _moveDirection * _walkingSpeed;
 

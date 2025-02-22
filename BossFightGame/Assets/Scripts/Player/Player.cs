@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Unit, IHealable
 {
@@ -16,6 +18,7 @@ public class Player : Unit, IHealable
     [SerializeField] private GameObject _projectileSpawnPoint, _MeleHitbox;
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private SpriteRenderer _PlayerSpriteRenderer;
+    [SerializeField] private PlayerInput _playerInput;
 
     [Header("Automatic assignment, dont touch")]
     [Space]
@@ -72,5 +75,40 @@ public class Player : Unit, IHealable
     public void ChangeTarget(GameObject newTarget)
     {
         _targetEnemy = newTarget;
+    }
+
+    //THIS IS TEST CODE, MAKE IT WORK IN THE GAME MANAGER INSTEAD
+    public void OnPause()
+    {
+        if (!allowInput) return;
+
+        Debug.Log("PAUSE");
+        _playerInput.SwitchCurrentActionMap("UI");
+        Debug.Log("current actionmap: " + _playerInput.currentActionMap);
+        Time.timeScale = 0;
+        GameManager.ToggleOptionsMenu(true);
+
+        StartCoroutine(BufferInput());
+    }
+
+    public void OnUnPause()
+    {
+        if (!allowInput) return;
+
+        Debug.Log("UNPAUSE");
+        _playerInput.SwitchCurrentActionMap("Player");
+
+        Debug.Log("current actionmap: " + _playerInput.currentActionMap);
+        Time.timeScale = 1;
+        GameManager.ToggleOptionsMenu(false);
+
+        StartCoroutine(BufferInput());
+    }
+    bool allowInput = true;
+    IEnumerator BufferInput()
+    {
+        allowInput = false;
+        yield return new WaitForSecondsRealtime(1f);
+        allowInput = true;
     }
 }
